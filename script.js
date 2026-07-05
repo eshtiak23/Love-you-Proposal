@@ -2,6 +2,7 @@
 let currentScreen = 1;
 let currentSlide = 0;
 let thinkyClickCount = 0;
+let noClickCount = 0;
 const totalSlides = 3;
 
 // ==================== Initialize ====================
@@ -34,7 +35,7 @@ function nextScreen(screenNum) {
     }, 100);
 }
 
-// ==================== Tricky Button ====================
+// ==================== Tricky Button (Screen 3) ====================
 function moveButton() {
     const btn = document.getElementById('thinkyBtn');
     if (!btn) return;
@@ -67,6 +68,57 @@ function moveButton() {
     setTimeout(() => {
         btn.style.transform = '';
     }, 500);
+}
+
+// ==================== No Button (Screen 2) - Super Tricky ====================
+let noButtonMessages = [
+    "No 😢",
+    "Are you sure? 🥺",
+    "Please? 🙏",
+    "Don't break my heart 💔",
+    "Try again... 🥺",
+    "I'll cry 😭",
+    "Pretty please? 💕",
+    "You can't catch me! 😏",
+    "Nice try! 😜",
+    "Keep trying! 💪"
+];
+
+function moveNoButton() {
+    const btn = document.getElementById('noBtn');
+    if (!btn) return;
+
+    noClickCount++;
+
+    // Change button text to guilt trip
+    if (noClickCount <= noButtonMessages.length) {
+        btn.textContent = noButtonMessages[Math.min(noClickCount - 1, noButtonMessages.length - 1)];
+    }
+
+    // Get viewport dimensions
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    // Calculate random position across entire screen
+    const randomX = (Math.random() - 0.5) * (viewportWidth - 100);
+    const randomY = (Math.random() - 0.5) * (viewportHeight - 50);
+
+    // Apply transform with faster animation
+    btn.style.transition = 'transform 0.15s ease-out';
+    btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    btn.style.position = 'relative';
+    btn.style.zIndex = '1000';
+
+    // Shrink the button slightly each time
+    const scale = Math.max(0.5, 1 - (noClickCount * 0.08));
+    btn.style.transform = `translate(${randomX}px, ${randomY}px) scale(${scale})`;
+
+    // Reset position after delay
+    setTimeout(() => {
+        btn.style.transform = '';
+        btn.style.position = '';
+        btn.style.zIndex = '';
+    }, 800);
 }
 
 // ==================== Gallery ====================

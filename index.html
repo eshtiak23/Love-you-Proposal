@@ -35,9 +35,14 @@
                 <h1 class="title">💖 Be honest with me... 💖</h1>
                 <p class="subtitle-small">This is important to me 💕✨</p>
                 <h2 class="question">💕 Do you trust me? 💕</h2>
-                <button class="btn btn-green" onclick="nextScreen(3)">
-                    Yes, I do 💕
-                </button>
+                <div class="button-group">
+                    <button class="btn btn-green" onclick="nextScreen(3)">
+                        Yes, I do 💕
+                    </button>
+                    <button class="btn btn-no" id="noBtn" onmouseenter="moveNoButton()" onclick="moveNoButton()" ontouchstart="moveNoButton()">
+                        No 😢
+                    </button>
+                </div>
             </div>
         </section>
 
