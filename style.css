@@ -1,0 +1,925 @@
+/* ==================== CSS Variables ==================== */
+:root {
+    --bg-main: #ffe4f0;
+    --bg-card: #fff5f9;
+    --bg-gradient-start: #ffd6e8;
+    --bg-gradient-mid: #ffb3d1;
+    --bg-gradient-end: #ff8fbf;
+    --pink-primary: #ff4da6;
+    --pink-deep: #e63996;
+    --pink-light: #ffc2e0;
+    --pink-ultra-light: #ffe6f2;
+    --purple-primary: #d63384;
+    --purple-light: #e876a8;
+    --lavender: #ff69b4;
+    --lavender-light: #ffb6d9;
+    --pink-glow: rgba(255, 77, 166, 0.4);
+    --pink-glow-strong: rgba(255, 77, 166, 0.6);
+    --green-btn: #ff69b4;
+    --green-hover: #ff4da6;
+    --white: #ffffff;
+    --text-dark: #8b2252;
+    --text-medium: #b04070;
+    --text-light: #d06090;
+    --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ==================== Reset & Base ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--font-main);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ==================== Particles Background ==================== */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--pink-primary);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float-particle 6s infinite ease-in-out;
+    box-shadow: 0 0 10px var(--pink-glow);
+}
+
+.particle.heart {
+    font-size: 16px;
+    background: transparent;
+    width: auto;
+    height: auto;
+    animation: float-heart 5s infinite ease-in-out;
+}
+
+.particle.sparkle {
+    font-size: 14px;
+    background: transparent;
+    width: auto;
+    height: auto;
+    animation: float-sparkle 4s infinite ease-in-out;
+}
+
+@keyframes float-particle {
+    0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+    25% { transform: translateY(-80px) translateX(20px) scale(1.2); opacity: 0.8; }
+    50% { transform: translateY(-150px) translateX(-20px) scale(1); opacity: 0.4; }
+    75% { transform: translateY(-80px) translateX(-30px) scale(1.1); opacity: 0.7; }
+}
+
+@keyframes float-heart {
+    0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-20px) scale(1.5) rotate(45deg); opacity: 0; }
+}
+
+@keyframes float-sparkle {
+    0%, 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.8; }
+    50% { transform: translateY(-60px) scale(1.5) rotate(180deg); opacity: 1; }
+}
+
+/* ==================== Screens ==================== */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.screen.exit-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.screen-content {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    z-index: 2;
+}
+
+/* ==================== Image Avatar ==================== */
+.image-avatar {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 8px 40px var(--pink-glow-strong);
+    border: 4px solid var(--pink-primary);
+    background: var(--white);
+    animation: avatar-glow 2s infinite ease-in-out;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.image-small {
+    width: 100px;
+    height: 100px;
+}
+
+.celebration-avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+@keyframes avatar-glow {
+    0%, 100% { box-shadow: 0 8px 40px var(--pink-glow); }
+    50% { box-shadow: 0 8px 60px var(--pink-glow-strong); }
+}
+
+/* ==================== Cat Avatar Base (Legacy) ==================== */
+.cat-avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+}
+
+.cat-face {
+    position: relative;
+    width: 100px;
+    height: 90px;
+    background: #fff;
+    border-radius: 50% 50% 45% 45%;
+    margin: 30px auto 0;
+    box-shadow: 0 8px 40px var(--pink-glow);
+    border: 3px solid var(--pink-primary);
+}
+
+.cat-ear {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 25px solid #fff;
+    top: -18px;
+}
+
+.cat-ear.left {
+    left: 5px;
+    transform: rotate(-10deg);
+}
+
+.cat-ear.right {
+    right: 5px;
+    transform: rotate(10deg);
+}
+
+.cat-ear::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 15px solid var(--pink-light);
+    top: 8px;
+    left: -8px;
+}
+
+.cat-eye {
+    position: absolute;
+    width: 14px;
+    height: 16px;
+    background: #2c2c2c;
+    border-radius: 50%;
+    top: 30px;
+    animation: blink 4s infinite;
+}
+
+.cat-eye.left { left: 20px; }
+.cat-eye.right { right: 20px; }
+
+.cat-eye::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+}
+
+@keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+.cat-nose {
+    position: absolute;
+    width: 10px;
+    height: 8px;
+    background: var(--pink-light);
+    border-radius: 50% 50% 40% 40%;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cat-mouth {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    border-bottom: 3px solid var(--text-light);
+    border-radius: 0 0 50% 50%;
+    top: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cat-mouth.smile {
+    width: 25px;
+    height: 12px;
+    border-bottom: 3px solid var(--text-light);
+}
+
+/* Blush cheeks */
+.cat-cheek {
+    position: absolute;
+    width: 18px;
+    height: 12px;
+    background: rgba(248, 180, 208, 0.7);
+    border-radius: 50%;
+    top: 50px;
+}
+
+.cat-cheek.left { left: 5px; }
+.cat-cheek.right { right: 5px; }
+
+/* Crown for love letter cat */
+.crown {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 30px;
+    background: linear-gradient(180deg, var(--lavender) 0%, var(--purple-light) 100%);
+    clip-path: polygon(0% 100%, 10% 40%, 25% 70%, 50% 0%, 75% 70%, 90% 40%, 100% 100%);
+    z-index: 5;
+}
+
+/* Floating hearts for heart cat */
+.floating-hearts {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+}
+
+.mini-heart {
+    position: absolute;
+    font-size: 20px;
+    animation: heart-float 2s infinite ease-in-out;
+}
+
+.mini-heart:first-child {
+    left: 10px;
+    animation-delay: 0s;
+}
+
+.mini-heart:last-child {
+    right: 10px;
+    animation-delay: 0.5s;
+}
+
+@keyframes heart-float {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-15px) scale(1.2); opacity: 0.8; }
+}
+
+/* Small cat for modal */
+.cat-small {
+    width: 80px;
+    height: 80px;
+}
+
+.cat-small .cat-face {
+    width: 70px;
+    height: 65px;
+    margin-top: 20px;
+    background: #fff5f9;
+    border: 2px solid var(--pink-light);
+}
+
+.cat-small .cat-ear {
+    border-left-width: 12px;
+    border-right-width: 12px;
+    border-bottom-width: 20px;
+    top: -14px;
+}
+
+.cat-small .cat-eye {
+    width: 10px;
+    height: 12px;
+    top: 22px;
+}
+
+.cat-small .cat-eye.left { left: 14px; }
+.cat-small .cat-eye.right { right: 14px; }
+
+.cat-small .cat-nose {
+    width: 8px;
+    height: 6px;
+    top: 36px;
+}
+
+.cat-small .cat-mouth {
+    width: 16px;
+    height: 8px;
+    top: 42px;
+    border-bottom-color: var(--text-light);
+}
+
+/* ==================== Typography ==================== */
+.title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    background: linear-gradient(135deg, var(--pink-primary), var(--purple-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--text-medium);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.subtitle-small {
+    font-size: 0.85rem;
+    color: var(--purple-primary);
+    margin-bottom: 10px;
+}
+
+.question {
+    font-size: 1.5rem;
+    color: var(--pink-primary);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* ==================== Buttons ==================== */
+.btn {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    min-width: 200px;
+    min-height: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--pink-primary), var(--pink-deep));
+    color: var(--white);
+    box-shadow: 0 5px 25px var(--pink-glow-strong);
+}
+
+.btn-primary:hover, .btn-primary:active {
+    transform: scale(1.05);
+    box-shadow: 0 8px 35px var(--pink-glow);
+}
+
+.btn-green {
+    background: var(--green-btn);
+    color: var(--white);
+    box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+}
+
+.btn-green:hover, .btn-green:active {
+    background: var(--green-hover);
+    transform: scale(1.05);
+}
+
+.btn-pink {
+    background: linear-gradient(135deg, var(--pink-primary), var(--lavender));
+    color: var(--white);
+    box-shadow: 0 5px 25px var(--pink-glow);
+    font-size: 1rem;
+}
+
+.btn-pink:hover, .btn-pink:active {
+    transform: scale(1.05);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--purple-primary);
+    color: var(--purple-primary);
+}
+
+.btn-outline:hover, .btn-outline:active {
+    background: var(--purple-primary);
+    color: var(--white);
+}
+
+.btn-thinky {
+    background: var(--lavender-light);
+    color: var(--text-dark);
+    border: 2px solid var(--lavender);
+    min-width: 180px;
+    font-size: 0.95rem;
+}
+
+.btn-thinky:hover, .btn-thinky:active {
+    background: var(--lavender);
+    color: var(--white);
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 5px 25px var(--pink-glow); }
+    50% { box-shadow: 0 5px 40px rgba(255, 105, 180, 0.8); }
+}
+
+.heart-icon {
+    display: inline-block;
+    animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ==================== Modal ==================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 77, 166, 0.2);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+}
+
+.modal {
+    background: var(--bg-card);
+    border: 3px solid var(--pink-primary);
+    border-radius: 25px;
+    padding: 30px 25px;
+    text-align: center;
+    max-width: 350px;
+    width: 100%;
+    animation: modal-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 10px 60px var(--pink-glow-strong);
+}
+
+@keyframes modal-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-title {
+    font-size: 1.6rem;
+    color: var(--pink-primary);
+    margin: 15px 0;
+}
+
+.modal-text {
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.emoji-row {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* ==================== Gallery ==================== */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gallery-wrapper {
+    overflow: hidden;
+    border-radius: 15px;
+    flex: 1;
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.gallery-card {
+    min-width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 15px;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.anime-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Scene 1: Couple under tree */
+.scene-couple {
+    background: linear-gradient(180deg, #87ceeb 0%, #98d4ee 40%, #7dcea0 40%, #27ae60 100%);
+}
+
+.scene-couple::before {
+    content: '';
+    position: absolute;
+    bottom: 30%;
+    left: 20%;
+    width: 40px;
+    height: 60px;
+    background: #8b4513;
+    border-radius: 5px;
+}
+
+.scene-couple::after {
+    content: '💑';
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+}
+
+/* Scene 2: Beach sunset */
+.scene-beach {
+    background: linear-gradient(180deg, #ff7e5f 0%, #feb47b 30%, #ffecd2 50%, #fcb69f 70%, #40e0d0 70%, #20b2aa 100%);
+}
+
+.scene-beach::after {
+    content: '👧';
+    position: absolute;
+    bottom: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+}
+
+/* Scene 3: Night sky */
+.scene-sunset {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #533483 100%);
+}
+
+.scene-sunset::before {
+    content: '⭐';
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    font-size: 1.5rem;
+    animation: twinkle 2s infinite;
+}
+
+.scene-sunset::after {
+    content: '💑';
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.gallery-nav {
+    background: var(--lavender-light);
+    border: none;
+    color: var(--text-dark);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s;
+}
+
+.gallery-nav:hover, .gallery-nav:active {
+    background: var(--pink-primary);
+    color: var(--white);
+}
+
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--lavender-light);
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background: var(--pink-primary);
+    transform: scale(1.2);
+}
+
+.gallery-caption {
+    font-style: italic;
+    color: var(--purple-primary);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+/* ==================== Love Letter ==================== */
+.love-letter {
+    background: var(--bg-card);
+    border: 3px solid var(--pink-primary);
+    border-radius: 25px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 10px 50px var(--pink-glow);
+}
+
+.letter-title {
+    font-size: 1.6rem;
+    color: var(--pink-primary);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.letter-content {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.letter-content p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+    margin-bottom: 15px;
+}
+
+/* ==================== Celebration ==================== */
+.celebration {
+    position: relative;
+    overflow: hidden;
+}
+
+.celebration-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--pink-primary), var(--pink-deep));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    animation: celebrate-text 1s ease-out;
+    text-shadow: 0 0 30px var(--pink-glow);
+}
+
+@keyframes celebrate-text {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.celebration-text {
+    font-size: 1.1rem;
+    color: var(--pink-primary);
+    margin-bottom: 10px;
+}
+
+.celebration-subtext {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.big-heart {
+    font-size: 5rem;
+    margin-bottom: 30px;
+    animation: heart-beat 1s infinite;
+    filter: drop-shadow(0 0 20px var(--pink-glow-strong));
+}
+
+@keyframes heart-beat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+}
+
+/* Confetti */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: -20px;
+    animation: confetti-fall 3s linear forwards;
+    box-shadow: 0 0 5px var(--pink-glow);
+}
+
+@keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* Hearts container */
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 2rem;
+    bottom: -50px;
+    animation: hearts-rise 4s ease-out forwards;
+    filter: drop-shadow(0 0 10px var(--pink-glow));
+}
+
+@keyframes hearts-rise {
+    0% { transform: translateY(0) scale(0); opacity: 1; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+}
+
+/* ==================== Mobile Optimizations ==================== */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .question {
+        font-size: 1.3rem;
+    }
+
+    .btn {
+        padding: 14px 35px;
+        font-size: 1rem;
+        min-width: 180px;
+    }
+
+    .cat-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .cat-face {
+        width: 85px;
+        height: 75px;
+    }
+
+    .love-letter {
+        padding: 20px 15px;
+        background: var(--bg-card);
+        border: 2px solid var(--pink-light);
+        box-shadow: 0 10px 40px rgba(155, 89, 182, 0.2);
+    }
+
+    .letter-content p {
+        font-size: 0.9rem;
+        color: var(--text-medium);
+    }
+
+    .celebration-title {
+        font-size: 1.8rem;
+    }
+
+    .big-heart {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .title {
+        font-size: 1.3rem;
+    }
+
+    .screen-content {
+        padding: 15px;
+    }
+
+    .modal {
+        padding: 25px 20px;
+    }
+}
+
+/* ==================== Utility ==================== */
+.hidden {
+    display: none !important;
+}
